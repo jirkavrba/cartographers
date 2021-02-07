@@ -1,13 +1,13 @@
 package dev.vrba.cartographers.engine.map;
 
-import com.sun.istack.NotNull;
 import dev.vrba.cartographers.engine.Material;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
-import java.util.stream.IntStream;
 
 @Data
+@NoArgsConstructor
 public class Map {
     /**
      * The state representation of each tile on the map arranged in a 11x11 grid
@@ -18,12 +18,7 @@ public class Map {
     /**
      * List of positions, which contains ruins
      */
-    private final Set<Position> ruins;
-
-    private Map(@NotNull Tile[][] tiles, @NotNull Set<Position> ruins) {
-        this.tiles = tiles;
-        this.ruins = ruins;
-    }
+    private Set<Position> ruins;
 
     /**
      * Creates a default game board used in each game (standard board)
@@ -47,18 +42,22 @@ public class Map {
                 new Position(5, 9)
         );
 
-        final Map instance = new Map(new Tile[11][11], ruins);
+        Map instance = new Map();
 
-        final Tile[][] tiles = (Tile[][]) IntStream.range(0, 10).mapToObj(y ->
-                IntStream.range(0, 10).mapToObj(x -> {
-                    Position position = new Position(x, y);
-                    Material material = mountains.contains(position) ? Material.MOUNTAIN : Material.EMPTY;
+        Tile[][] tiles = new Tile[10][10];
 
-                    return new Tile(instance, material, position);
-                }).toArray()
-        ).toArray();
+        for (int x = 0; x <= 10; x++) {
+            for (int y = 0; y <= 10; y++) {
+                Position position = new Position(x, y);
+                Material material = mountains.contains(position) ? Material.MOUNTAIN : Material.EMPTY;
+
+                tiles[y][x] = new Tile(instance, material, position);
+            }
+        }
 
         instance.setTiles(tiles);
+        instance.setRuins(ruins);
+
         return instance;
     }
 }
