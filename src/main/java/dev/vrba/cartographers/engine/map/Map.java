@@ -1,9 +1,12 @@
 package dev.vrba.cartographers.engine.map;
 
+import com.sun.istack.NotNull;
 import dev.vrba.cartographers.engine.Material;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -50,6 +53,44 @@ public class Map {
             for (int y = 0; y <= 10; y++) {
                 Position position = new Position(x, y);
                 Material material = mountains.contains(position) ? Material.MOUNTAIN : Material.EMPTY;
+
+                tiles[y][x] = new Tile(instance, material, position);
+            }
+        }
+
+        instance.setTiles(tiles);
+        instance.setRuins(ruins);
+
+        return instance;
+    }
+
+    /**
+     * Creates new map instance from given material blueprint.
+     * Material blueprint is a 10x10 matrix of characters, where each character represents a material.
+     *
+     * For material codes see {@link Material} enum values.
+     *
+     * @param blueprint 10x10 characters matrix of materials
+     * @param ruins set of ruins
+     * @return created map instance
+     */
+    public static Map createFromBlueprint(@NotNull char[][] blueprint, @NotNull Set<Position> ruins) {
+        if (blueprint.length != 10 || blueprint[0].length != 10) {
+            throw new IllegalArgumentException("Blueprint must be a 10x10 char matrix!");
+        }
+
+        Map instance = new Map();
+        Tile[][] tiles = new Tile[10][10];
+
+        for (int x = 0; x <= 10; x++) {
+            for (int y = 0; y <= 10; y++) {
+                char currentMaterial = blueprint[y][x];
+
+                Position position = new Position(x, y);
+                Material material = Arrays.stream(Material.values())
+                        .filter(it -> it.character == currentMaterial)
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException("Material \"" + currentMaterial + "\" is not valid."));
 
                 tiles[y][x] = new Tile(instance, material, position);
             }
