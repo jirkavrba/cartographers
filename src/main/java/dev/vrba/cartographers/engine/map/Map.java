@@ -74,6 +74,7 @@ public class Map {
      * @param ruins set of ruins
      * @return created map instance
      */
+    @NotNull
     public static Map createFromBlueprint(@NotNull char[][] blueprint, @NotNull Set<Position> ruins) {
         if (blueprint.length != 10 || blueprint[0].length != 10) {
             throw new IllegalArgumentException("Blueprint must be a 10x10 char matrix!");

@@ -23,11 +23,13 @@ public class Position {
        this.y = y;
     }
 
-    public @NotNull Position add(@NotNull Position other) {
+    @NotNull
+    public Position add(@NotNull Position other) {
         return new Position(x + other.getX(), y + other.getY());
     }
 
-    public @NotNull Position add(@NotNull int x, @NotNull int y) {
+    @NotNull
+    public Position add(@NotNull int x, @NotNull int y) {
         return new Position(this.x + x, this.y + y);
     }
 }
