@@ -66,4 +66,52 @@ public class ShapeTests {
                 assertThrows(IllegalArgumentException.class, () -> new Shape("...,.#.,x.#,###")).getMessage()
         );
     }
+
+    @Test
+    public void testShapeCanBeRotatedClockwise() {
+        Shape original = new Shape(
+            "..#",
+            "###"
+        );
+
+        Shape rotated = original.rotateClockwise();
+        Shape expected = new Shape(
+                "##",
+                ".#",
+                ".#"
+        );
+
+        assertEquals(expected.getWidth(), rotated.getWidth());
+        assertEquals(expected.getHeight(), rotated.getHeight());
+
+        for (int x = 0; x < expected.getWidth(); x++) {
+            for (int y = 0; y < expected.getHeight(); y++) {
+                assertEquals(expected.at(x, y), rotated.at(x, y));
+            }
+        }
+    }
+
+    @Test
+    public void testShapeCanBeRotatedCounterClockwise() {
+        Shape original = new Shape(
+                "..#",
+                "###"
+        );
+
+        Shape rotated = original.rotateCounterClockwise();
+        Shape expected = new Shape(
+                "#.",
+                "#.",
+                "##"
+        );
+
+        assertEquals(expected.getWidth(), rotated.getWidth());
+        assertEquals(expected.getHeight(), rotated.getHeight());
+
+        for (int x = 0; x < expected.getWidth(); x++) {
+            for (int y = 0; y < expected.getHeight(); y++) {
+                assertEquals(expected.at(x, y), rotated.at(x, y));
+            }
+        }
+    }
 }

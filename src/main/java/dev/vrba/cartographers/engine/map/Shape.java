@@ -29,7 +29,7 @@ public class Shape {
         this(definition.split(","));
     }
 
-    public Shape(@NotNull String[] rows) {
+    public Shape(@NotNull String... rows) {
         this.width = rows[0].length();
         this.height = rows.length;
 
@@ -75,7 +75,7 @@ public class Shape {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                rotated[x][y] = definition[y][x];
+                rotated[x][y] = definition[y][width - 1 - x];
             }
         }
 
@@ -88,7 +88,7 @@ public class Shape {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                rotated[x][y] = definition[width - y][height - x];
+                rotated[x][y] = definition[height - 1 - y][x];
             }
         }
 
