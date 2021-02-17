@@ -15,14 +15,14 @@
 <script>
 
 export default {
-  name: 'Welcome',
+  name: "Welcome",
   data: () => ({
     username: ""
   }),
   methods: {
     login() {
-      this.$router.replace('/games');
-      this.$store.dispatch('login', this.username)
+      this.$router.replace("/games");
+      this.$store.dispatch("login", this.username)
     }
   },
   components: {}
