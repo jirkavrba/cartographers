@@ -14,6 +14,8 @@
 
 <script>
 
+import {v4 as uuid} from 'uuid';
+
 export default {
   name: "Welcome",
   data: () => ({
@@ -22,7 +24,10 @@ export default {
   methods: {
     login() {
       this.$router.replace("/games");
-      this.$store.dispatch("login", this.username)
+      this.$store.commit("login", {
+        id: uuid(),
+        username: this.username
+      })
     }
   },
   components: {}

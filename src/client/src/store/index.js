@@ -15,14 +15,6 @@ export default new Vuex.Store({
         state.username = payload.username
     }
   },
-  actions: {
-    login(payload) {
-      let id = (Math.random() * (1 << 16)).toString(36)
-      let username = payload.username
-
-      this.commit('login', {id, username})
-    }
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })
