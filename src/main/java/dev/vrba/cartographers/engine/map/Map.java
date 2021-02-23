@@ -2,26 +2,27 @@ package dev.vrba.cartographers.engine.map;
 
 import com.sun.istack.NotNull;
 import dev.vrba.cartographers.engine.Material;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class Map {
     /**
      * The state representation of each tile on the map arranged in a 11x11 grid
      * Tile loading can be done by calling {@code map.getTileAt}.
      */
+    @Setter(AccessLevel.PRIVATE)
     private Tile[][] tiles;
 
     /**
      * List of positions, which contains ruins
      */
+    @Setter(AccessLevel.PRIVATE)
     private Set<Position> ruins;
 
     /**
@@ -48,7 +49,7 @@ public class Map {
 
         Map instance = new Map();
 
-        Tile[][] tiles = new Tile[10][10];
+        Tile[][] tiles = new Tile[11][11];
 
         for (int x = 0; x <= 10; x++) {
             for (int y = 0; y <= 10; y++) {
@@ -77,12 +78,12 @@ public class Map {
      */
     @NotNull
     public static Map createFromBlueprint(@NotNull char[][] blueprint, @NotNull Set<Position> ruins) {
-        if (blueprint.length != 10 || blueprint[0].length != 10) {
-            throw new IllegalArgumentException("Blueprint must be a 10x10 char matrix!");
+        if (blueprint.length != 11 || blueprint[0].length != 11) {
+            throw new IllegalArgumentException("Blueprint must be a 11x11 char matrix!");
         }
 
         Map instance = new Map();
-        Tile[][] tiles = new Tile[10][10];
+        Tile[][] tiles = new Tile[11][11];
 
         for (int x = 0; x <= 10; x++) {
             for (int y = 0; y <= 10; y++) {
