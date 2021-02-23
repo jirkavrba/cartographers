@@ -120,6 +120,16 @@ public class Map {
         }
     }
 
+    public @NotNull Tile[] row(int n) {
+        return (Tile[]) Arrays.stream(tiles)
+                .map(row -> row[n])
+                .toArray();
+    }
+
+    public @NotNull Tile[] column(int n) {
+        return tiles[n];
+    }
+
     public @NotNull Set<Tile> tilesByMaterial(@NotNull Material material) {
         return Arrays.stream(tiles)
             .flatMap(Arrays::stream)
