@@ -12,4 +12,8 @@ public class Score {
     public final int acquiredCoins;
 
     public final int ambushedTilesLoss;
+
+    public int getTotal() {
+        return firstEdictCardEvaluation + secondEdictCardEvaluation + acquiredCoins - ambushedTilesLoss;
+    }
 }
