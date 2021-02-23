@@ -15,4 +15,8 @@ public class Tile {
         this.material = material;
         this.position = position;
     }
+
+    public boolean isEmpty() {
+        return material == Material.EMPTY;
+    }
 }
