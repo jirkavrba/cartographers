@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -103,7 +104,7 @@ public class Map {
         return instance;
     }
 
-    public Tile tileAt(int x, int y) {
+    public @NotNull Tile tileAt(int x, int y) {
         if (Math.max(x, y) < 0) {
             throw new IllegalArgumentException("Both x and y coordinates must be positive.");
         }
@@ -112,5 +113,22 @@ public class Map {
         catch (IndexOutOfBoundsException exception) {
             throw new IllegalArgumentException("Maximum index for both x and y coordinate is 10.", exception);
         }
+    }
+
+    // TODO: Maybe rewrite this in a more functional style...
+    public @NotNull Set<Tile> tilesByMaterial(@NotNull Material material) {
+        Set<Tile> matching = new HashSet<>();
+
+        for (int y = 0; y < tiles.length; y++) {
+            for (int x = 0; x < tiles[0].length; x++) {
+                Tile current = tileAt(x, y);
+
+                if (current.getMaterial() == material) {
+                    matching.add(current);
+                }
+            }
+        }
+
+        return matching;
     }
 }
