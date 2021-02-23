@@ -102,4 +102,15 @@ public class Map {
 
         return instance;
     }
+
+    public Tile tileAt(int x, int y) {
+        if (Math.max(x, y) < 0) {
+            throw new IllegalArgumentException("Both x and y coordinates must be positive.");
+        }
+
+        try { return tiles[y][x]; }
+        catch (IndexOutOfBoundsException exception) {
+            throw new IllegalArgumentException("Maximum index for both x and y coordinate is 10.", exception);
+        }
+    }
 }
