@@ -35,18 +35,18 @@ public class ShapeTests {
         assertEquals(4, shape.getWidth());
         assertEquals(3, shape.getHeight());
 
-        assertFalse(shape.at(0, 0));
-        assertFalse(shape.at(1, 0));
-        assertFalse(shape.at(2, 0));
-        assertTrue(shape.at(3, 0));
-        assertTrue(shape.at(0, 1));
-        assertTrue(shape.at(1, 1));
-        assertTrue(shape.at(2, 1));
-        assertTrue(shape.at(3, 1));
-        assertTrue(shape.at(0, 2));
-        assertFalse(shape.at(1, 2));
-        assertFalse(shape.at(2, 2));
-        assertFalse(shape.at(3, 2));
+        assertFalse(shape.tileAt(0, 0));
+        assertFalse(shape.tileAt(1, 0));
+        assertFalse(shape.tileAt(2, 0));
+        assertTrue(shape.tileAt(3, 0));
+        assertTrue(shape.tileAt(0, 1));
+        assertTrue(shape.tileAt(1, 1));
+        assertTrue(shape.tileAt(2, 1));
+        assertTrue(shape.tileAt(3, 1));
+        assertTrue(shape.tileAt(0, 2));
+        assertFalse(shape.tileAt(1, 2));
+        assertFalse(shape.tileAt(2, 2));
+        assertFalse(shape.tileAt(3, 2));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ShapeTests {
 
         for (int x = 0; x < expected.getWidth(); x++) {
             for (int y = 0; y < expected.getHeight(); y++) {
-                assertEquals(expected.at(x, y), rotated.at(x, y));
+                assertEquals(expected.tileAt(x, y), rotated.tileAt(x, y));
             }
         }
     }
@@ -110,7 +110,7 @@ public class ShapeTests {
 
         for (int x = 0; x < expected.getWidth(); x++) {
             for (int y = 0; y < expected.getHeight(); y++) {
-                assertEquals(expected.at(x, y), rotated.at(x, y));
+                assertEquals(expected.tileAt(x, y), rotated.tileAt(x, y));
             }
         }
     }
